@@ -166,11 +166,12 @@ public class Tree_traversal {
 //        public void close() throws IOException {
 //            dout.close();
 //        }
-////    }
-//    static class Node{
-//        int data;
-//        Node left, right;
 //    }
+    static class Node{
+        int data;
+        Node left, right;
+    }
+    static Node head;
     static int search(int[] ar, int val){
         for (int i=0;i<ar.length;i++)
             if (ar[i] == val)
@@ -178,16 +179,27 @@ public class Tree_traversal {
 
         return -1;
     }
-    static void printPostorder(int[] in, int[] pre){
+    static Node buildTree(int[] in, int[] pre){
+        if (in.length == 0 || pre.length == 0)
+            return null;
+
+        Node root = new Node();
         int rootIdx = search(in, pre[0]);
 
-        if (rootIdx != 0)
-            printPostorder(Arrays.copyOfRange(in, 0, rootIdx), Arrays.copyOfRange(pre, 1, rootIdx+1));
+        root.left = buildTree(Arrays.copyOfRange(in, 0, rootIdx), Arrays.copyOfRange(pre, 1, rootIdx+1));
 
-        if (rootIdx != (in.length -1))
-            printPostorder(Arrays.copyOfRange(in, rootIdx+1, in.length), Arrays.copyOfRange(pre, rootIdx+1, pre.length));
+        root.right = buildTree(Arrays.copyOfRange(in, rootIdx+1, in.length), Arrays.copyOfRange(pre, rootIdx+1, pre.length));
 
-        System.out.print(pre[0] + " ");
+        root.data = pre[0];
+        return root;
+    }
+    static void printPostOrder(Node root){
+        if (root == null)
+            return;
+
+        printPostOrder(root.left);
+        printPostOrder(root.right);
+        System.out.print(root.data + " ");
     }
     public static void main(String[] args) throws IOException {
         //Reader sc = new Reader();
@@ -195,6 +207,7 @@ public class Tree_traversal {
         int in[] = { 4, 2, 5, 1, 3, 6 };
         int pre[] = { 1, 2, 4, 5, 3, 6 };
 
-        printPostorder(in, pre);
+        head = buildTree(in, pre);
+        printPostOrder(head);
     }
 }
