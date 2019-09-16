@@ -26,7 +26,10 @@ int main(){
     // cout<<"\n"<<(a+1);
     // cout<<"\n"<<a[1];
     // cout<<"\n"<<&a[1];
-   // cout<<Size(c);
+   cout<<Size(c);
    char s[]={'r', 'a', 'j'};
     printcombinations(s, Size(s), "");
+    // string s = "Hello";
+    // s[0] = 'b';
+    //cout<<s<<"\n";
 }
