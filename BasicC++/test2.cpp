@@ -13,6 +13,8 @@ void print(char* C){
 }
 int main(){
     char c[100] = "Hello";
+    int ar[5];
+    cout<<ar[0]<<" "<<ar[1]<<" "<<ar[2];
     cout<<c<<"\n";
     print(c);
 }
