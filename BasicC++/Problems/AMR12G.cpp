@@ -5,12 +5,15 @@ using namespace std;
 
 char ar[52][52];
 int findMin(int *ar, int len){
-    int min=0;
+    int min=ar[0];
+    int index=0;
     REP(1, len, 1){
-        if(ar[i]<min)
-            min=i;
+        if(ar[i]<min){
+            min=ar[i];
+            index=i;
+        }
     }
-    return min;
+    return index;
 }
 int compute(int N, int M, int K){
     int *bulbslit=new int[N]{0};
