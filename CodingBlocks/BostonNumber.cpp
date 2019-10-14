@@ -15,7 +15,7 @@ int digit_sum(int n){
 int compute(ll num){
     ll sum=0;
     ll n=num;
-    for(int i=2;i<=sqrt(num);i++){
+    for(int i=2;i<=sqrt(n);i++){
         while(num%i==0){
             num/=i;
             sum+=digit_sum(i);
