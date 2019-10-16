@@ -13,8 +13,21 @@ ll power(int a, int b){
     
     return ans;
 }
+ll fastPower(int a, int b){
+    ll res=1;
+    while (b)
+    {
+      if(b&1)
+        res*=a;
+    a*=a;
+    b>>=1;
+    cout<<res<<" "<<a<<endl;
+    }
+    return res;
+}
 int main(){
     int a,b;
     cin>>a>>b;
     cout<<power(a, b)<<endl;
+    cout<<fastPower(a, b);
 }
