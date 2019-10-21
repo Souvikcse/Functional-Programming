@@ -48,6 +48,9 @@ int main(){
                num/=p;
            }
        }
+        if(isPrime(num)){
+		   freqPrimefact[num]++;
+	   }
     }
     ll ans=1;
     for(int i=2;i<N;i++){
