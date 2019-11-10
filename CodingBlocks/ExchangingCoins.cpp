@@ -16,5 +16,5 @@ ll solve(ll num){
 int main(){
     ll n;
     cin>>n;
-    cout<<solve(n)<<endl;
+    cout<<solve(n)<<"\n";
 }
