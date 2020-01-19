@@ -30,7 +30,7 @@ void updateTree(int *tree, int ss, int se, int i, int val, int parent){
     }
     int mid=(ss+se)/2;
     updateTree(tree, ss, mid, i, val, 2*parent);
-    updateTree(tree, ss, mid, i, val, 2*parent + 1);
+    updateTree(tree, mid+1, se, i, val, 2*parent + 1);
     tree[parent] = min(tree[2*parent], tree[2*parent + 1]);
 }
 int query(int *tree, int ss, int se, int qs, int qe, int parent){
