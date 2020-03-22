@@ -4,32 +4,15 @@
 #include<list>
 #include<cstring>
 #include<algorithm>
+#include<queue>
 using namespace std;
 
 unordered_map<string, int> umap;
 unordered_map<int, string> invmap;
 vector<int> v[101];
-// bool compare(int &x, int &y){
-//     if(comp[x]!=comp[y]){
-//         return x<y;
-//     }
-//     return torder[x]<torder[y];
-// }
-void dfs(int node, vector<bool> &visited, list<int> &order){
-    visited[node] = true;
-    for(int x: v[node]){
-        if(!visited[x])
-            dfs(x, visited, order);
-    }
-    order.push_front(node);
-}
 void dfsTopological(int n, int k){
-    vector<bool> visited(n);
     list<int> order;
-    for(int i=n-1;i>=0;i--){
-        if(!visited[i])
-            dfs(i, visited, order);
-    }
+    
     // //cout<<order.size();
     // auto it=order.begin();
     // for(int i=0;i<order.size();i++){
