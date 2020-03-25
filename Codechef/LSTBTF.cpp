@@ -1,47 +1,34 @@
-#include <iostream>
-#include<unordered_set>
-#include<vector>
+#include<iostream>
+#include<cmath>
 using namespace std;
 
-unordered_set<int> uset;
-vector<int> v;
-int sum;
-bool can_find(int i, int n){
-    if(i==n){
-        return (uset.find(sum)!=uset.end());
-    }
-    for(int k=1;k<10;k++){
-        v[i] = k;
-        sum += k*k;
-        if(can_find(i+1, n))
-            return true;
-        sum -= k*k;
-    }
-    return false;
-} 
-int main()
-{
-    for(int i=1;i<=9000;i++){
-        uset.insert(i*i);
-    }
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    cout.tie(0);
+int ar[1000001];
+int main(){
     int t;
-    cin>>t;
+    scanf("%d", &t);
     while(t--){
         int n;
-        cin>>n;
+        scanf("%d", &n);
+        for(int i=0;i<n;i++)   ar[i] = 1;
+        int sum = n;
 
-        v.resize(n);
-        sum = 0;
-        if(!can_find(0, n))
-            cout<<"-1";
-        else{
-            for(int x:v)
-                cout<<x;
+        int index = n-1;
+        while(sum<(n*81)){
+            int x = (int)sqrt(sum);
+            if((x*x)==sum) break;
+
+            while(ar[index]==9)   index--;
+            sum -= ar[index]*ar[index];
+            ar[index]++;
+            sum += ar[index]*ar[index];
+            for(int i=index+1;i<n;i++){
+                sum -= ar[i]*ar[i];
+                ar[i] = ar[index];
+                sum += ar[i]*ar[i];
+            }
+            index = n-1;
         }
-
-        cout<<endl;
+        for(int i=0;i<n;i++)   printf("%d", ar[i]);
+        printf("\n");
     }
 }
