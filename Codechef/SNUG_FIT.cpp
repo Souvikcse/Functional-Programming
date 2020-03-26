@@ -16,7 +16,12 @@ int main(){
         for(int i=0;i<n;i++){
             cin>>b[i];
         }
-        int sum= n*min(a[0], b[0]);
+        sort(a, a+n);
+        sort(b, b+n);
+        long long int sum=0;
+        for(int i=n-1;i>=0;i--){
+            sum+= min(a[i], b[i]);
+        }
         cout<<sum<<"\n";
     }
 }
