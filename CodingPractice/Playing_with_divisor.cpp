@@ -1,27 +1,25 @@
 #include<iostream>
+typedef long long int ll;
 using namespace std;
 
-int mod = 1e9+7;
-int fastpow(int a, int b){
-    int ans = 1;
-    while(b){
-        if(b&1)
-            ans = (ans * a)%mod;
-
-        a = (a * a)%mod;
-        b>>=1;
-    }
-    return ans;
-}
-
+int mod = 1000000007;
 int main(){
-    int x;
-    cin>>x;
-    int a[x];
-    int sum = 0;
-    for(int i=0;i<x;i++){
+    int n;
+    cin>>n;
+    ll a[n];
+    ll no_of_divisors = 1;
+    for(int i=0;i<n;i++){
         cin>>a[i];
-        sum += a[i];
+        no_of_divisors = (no_of_divisors*((a[i]+1)%mod))%mod;
     }
-
+    //cout << no_of_divisors << endl;
+    ll f = (no_of_divisors * 500000004)%mod;
+    ll ans = 1;
+    for(int i=0;i<n;i++){
+        a[i] = (a[i]*f)%mod;
+        //cout << a[i] << " " ;
+        ans = (ans * ((a[i]+1)%mod))%mod;
+    }
+    //ans %= mod;
+    cout<< ans <<endl;
 }
