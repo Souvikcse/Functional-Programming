@@ -25,7 +25,7 @@ int main(){
                 k++;
             }
         }
-        if(k==m && i==n){
+        if(k<=m && i==n){
             ans = mid;
             end = mid-1;
         }
