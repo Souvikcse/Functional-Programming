@@ -5,63 +5,72 @@ using namespace std;
 
 int count[N] = {0};
 int p_factors[N] = {0};
-void sieve(){
-    
-    for(int i=1;i<N;i++){
-        for(int j=i;j<N;j+=i){
-            count[j]+=1;
-        }
-    } 
-    for (int p = 2; p < N; p++)  
-        if (p_factors[p] == 0)  
-            for (int i = p; i<N; i += p)  
-                p_factors[i]++;
-
+int fastPower(int a, int b){
+    int res=1;
+    while (b)
+    {
+      if(b&1)
+        res*=a;
+    a*=a;
+    b>>=1;
+    //cout<<res<<" "<<a<<endl;
+    }
+    return res;
 }
-// bool check(int num, int divs, int pfs){
-//     int d = 1;
-//     int ans = 0;
-//     int n = num;
-//     int sqroot = sqrt(num);
-//     for(int i=2;i<=sqroot;i++){
-//         if(num%i==0){
-//             ans += 1;
-//             int c=0;
-//             while((num%i)==0){
-//                 c++;
-//                 num/=i;
-//             }
-//             d*=(c+1);
-//         }
-//     }
-//     if(num!=1){
-//         d*=2;
-//         ans+=1;
-//     }
-//     //cout << n <<"-> " << d << " " << ans << "\n";
-//     return (d==divs && ans==pfs);
-// }
+pair<int, int> primeFactors(int n)  
+{  
+    int count = 0, dist_count = 0;  
+    while (n % 2 == 0)  {  
+        count++;
+        dist_count = 1;
+        n = n/2;  
+    }  
+  
+    bool flag;
+    for (int i = 3; i <= sqrt(n); i = i + 2)  {   
+        flag = true;
+        while (n % i == 0)  
+        {  
+            if (flag)
+            {
+                dist_count++;
+                flag = false;
+            }
+            count++;  
+            n = n/i;  
+        }  
+    }  
+
+    if (n > 2)  
+    {
+        count++;
+        dist_count++;
+    }
+
+    return make_pair(count, dist_count);  
+} 
 int main() {
     int t;
     cin>>t;
-    sieve();
+    //sieve();
     while(t--){
         int x, k;
         cin>>x>>k;
 
-        int i;
-        bool ans = false;
-        // for(i=1;i<=1000000;i++){
-        //     //cout << i <<"-> " << count[i] << " " << p_factors[i] << "\n";
-        //     if(count[i]==x && p_factors[i]==k){
-        //         ans = true;
-        //         break;
-        //     }
-        // }
-        if(x==2 && k!=1){
-            ans = false;
+        if (k == 1 && x > 1){
+            cout << 1 << "\n";
+            continue;
         }
-        ans == true? cout<<"1":cout<<"0";
-        cout<<"\n";
+
+        if(x<=k || k>=30 || fastPower(2, k)>x){
+            cout<<"0"<<"\n";
+            continue;
+        }
+
+        std::pair<int, int> ans = primeFactors(x);
+
+        if (ans.first < k)     cout << 0 << "\n";
+        else                   cout << 1 << "\n";
+
     }
 }
